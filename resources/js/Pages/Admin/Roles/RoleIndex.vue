@@ -1,20 +1,45 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
+import Table from '@/Components/Table/Table.vue';
+import TableRow from '@/Components/Table/TableRow.vue';
+import TableHeaderCell from '@/Components/Table/TableHeader.vue';
+import TableDataCell from '@/Components/Table/TableDataCell.vue';
+defineProps(['roles'])
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Roles de Usuarios" />
 
     <AdminLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>
-        </template>
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 dark:text-gray-100">Estás en la página de Roles. </div>
+                    <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-between">
+                        <h1>Roles</h1>
+                        <Link :href="route('roles.create')" class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded">Nuevo Rol</Link>
+                    </div>
+                    <div class="mt-6">
+                        <Table>
+                            <template #header>
+                                <TableRow>
+                                    <TableHeaderCell>ID</TableHeaderCell>
+                                    <TableHeaderCell>Nombre</TableHeaderCell>
+                                    <TableHeaderCell></TableHeaderCell>
+                                </TableRow>
+                            </template>
+                            <template #default>
+                                <TableRow v-for="role in roles" :key="role.id" class="border-b">
+                                    <TableDataCell>{{role.id}}</TableDataCell>
+                                    <TableDataCell>{{role.name}}</TableDataCell>
+                                    <TableDataCell>
+                                        <Link :href="route('roles.edit',role.id)" class="p-2 text-lg text-green-300 hover:text-indigo-700">Editar</Link>
+                                        <Link :href="route('roles.destroy',role.id)" method="DELETE" as="button" class="p-2 text-lg text-red-500 hover:text-indigo-700">Eliminar</Link>
+                                    </TableDataCell>
+                                </TableRow>
+                            </template>
+                        </Table>
+                    </div>
                 </div>
             </div>
         </div>

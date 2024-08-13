@@ -1,20 +1,41 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import Table from '@/Components/Table/Table.vue';
+import TableRow from '@/Components/Table/TableRow.vue';
+import TableHeaderCell from '@/Components/Table/TableHeader.vue';
+import TableDataCell from '@/Components/Table/TableDataCell.vue';
+defineProps(['users'])
 </script>
 
 <template>
     <Head title="Dashboard" />
 
     <AdminLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>
-        </template>
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 dark:text-gray-100">Estás en la página de usuarios. </div>
+                    <div class="p-6 text-gray-900 dark:text-gray-100">Usuarios en Registro. </div>
+                    <div class="mt-6">
+                        <Table>
+                            <template #header>
+                                <TableRow>
+                                    <TableHeaderCell>ID</TableHeaderCell>
+                                    <TableHeaderCell>Nombre</TableHeaderCell>
+                                    <TableHeaderCell>E-mail</TableHeaderCell>
+                                    <TableHeaderCell>Acción</TableHeaderCell>
+                                </TableRow>
+                            </template>
+                            <template #default>
+                                <TableRow v-for="user in users" :key="user.id" class="border-b">
+                                    <TableDataCell>{{user.id}}</TableDataCell>
+                                    <TableDataCell>{{user.name}}</TableDataCell>
+                                    <TableDataCell>{{user.email}}</TableDataCell>
+                                    <TableDataCell>Editar/Eliminar</TableDataCell>
+                                </TableRow>
+                            </template>
+                        </Table>
+                    </div>
                 </div>
             </div>
         </div>
