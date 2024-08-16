@@ -25,7 +25,7 @@ const form= useForm({
                     <div class="mt-6 mx-3 mb-3 bg-slate-400 p-2 rounded-md">
                         <form @submit.prevent="form.post(route('roles.store'))">
                             <div>
-                                <InputLabel for="name" value="Name" class="dark:text-slate-900" />
+                                <InputLabel for="name" value="Nombre" class="dark:text-slate-900" />
 
                                 <TextInput
                                     id="name"

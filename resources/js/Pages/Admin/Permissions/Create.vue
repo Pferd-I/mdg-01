@@ -3,36 +3,29 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
-import PrimaryButtonL from '@/Components/PrimaryButtonLightContainer.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputErrorL from '@/Components/InputErrorLightContainer.vue';
 
-const props = defineProps({
-    role: {
-        type: Object,
-        required: true,
-    }
-})
-
 const form= useForm({
-    name: props.role.name,
+    name: "",
 })
 </script>
 
 <template>
-    <Head title="Editar Rol" />
+    <Head title="Nuevo Permiso" />
 
     <AdminLayout>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-between">
-                        <h1>Crear Nuevo Rol</h1>
-                        <Link :href="route('roles.index')" class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded">Volver</Link>
+                        <h1>Crear Nuevo Permiso</h1>
+                        <Link :href="route('permissions.index')" class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded">Volver</Link>
                     </div>
                     <div class="mt-6 mx-3 mb-3 bg-slate-400 p-2 rounded-md">
-                        <form @submit.prevent="form.put(route('roles.update', role.id))">
+                        <form @submit.prevent="form.post(route('permissions.store'))">
                             <div>
-                                <InputLabel for="name" value="Nombre" class="dark:text-slate-900" />
+                                <InputLabel for="name" value="Nombre" class="dark:text-slate-900 font-extrabold" />
 
                                 <TextInput
                                     id="name"
@@ -41,7 +34,7 @@ const form= useForm({
                                     v-model="form.name"
                                     autofocus
                                     autocomplete="username"
-                                    oninvalid="this.setCustomValidity('Por favor ingrese el nombre del Rol')"
+                                    oninvalid="this.setCustomValidity('Por favor ingrese el nombre del Permiso')"
                                     oninput="setCustomValidity('')"
                                 />
 
@@ -49,9 +42,9 @@ const form= useForm({
                             </div>
 
                             <div class="flex items-center mt-4">
-                                <PrimaryButtonL class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                    Actualizar
-                                </PrimaryButtonL>
+                                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                    Crear
+                                </PrimaryButton>
                             </div>
                         </form>
                     </div>
