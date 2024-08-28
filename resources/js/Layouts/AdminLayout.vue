@@ -12,19 +12,19 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    <div class="w-full h-full">
+    <div class="w-full h-full -z-40">
         <!-- component -->
-        <aside class="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
+        <aside class="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-zinc-400 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
             <div>
                 <div class="-mx-6 px-6 py-4">
                     <a href="#" title="home">
                         <img src="https://tailus.io/sources/blocks/stats-cards/preview/images/logo.svg" class="w-32" alt="tailus logo">
                     </a>
                 </div>
-        
+
                 <ul class="space-y-2 tracking-wide mt-8">
                     <li>
-                        <SidebarLink 
+                        <SidebarLink
                             href="/dashboard"
                             :active="false">
                             <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
@@ -36,7 +36,7 @@ const showingNavigationDropdown = ref(false);
                         </SidebarLink>
                     </li>
                     <li>
-                        <SidebarLink 
+                        <SidebarLink
                             :href="route('users.index')"
                             :active="route().current('users.index')">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -46,7 +46,7 @@ const showingNavigationDropdown = ref(false);
                         </SidebarLink>
                     </li>
                     <li>
-                        <SidebarLink 
+                        <SidebarLink
                             :href="route('roles.index')"
                             :active="route().current('roles.index')">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -56,13 +56,13 @@ const showingNavigationDropdown = ref(false);
                         </SidebarLink>
                     </li>
                     <li>
-                        <SidebarLink 
+                        <SidebarLink
                             :href="route('permissions.index')"
                             :active="route().current('permissions.index')">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0 1 19.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 0 0 4.5 10.5a7.464 7.464 0 0 1-1.15 3.993m1.989 3.559A11.209 11.209 0 0 0 8.25 10.5a3.75 3.75 0 1 1 7.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 0 1-3.6 9.75m6.633-4.596a18.666 18.666 0 0 1-2.485 5.33" />
                             </svg>
-                              
+
                             <span class="-mr-1 font-medium">Permisos</span>
                         </SidebarLink>
                     </li>
@@ -75,7 +75,7 @@ const showingNavigationDropdown = ref(false);
                             </svg>
                             <span class="group-hover:text-gray-700">Categories</span>
                         </a>
-                    </li>                
+                    </li>
                     <li>
                         <a href="#" class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -106,7 +106,7 @@ const showingNavigationDropdown = ref(false);
                     -->
                 </ul>
             </div>
-        
+
             <div class="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
                 <Link :href="route('logout')" method="post" as="button"
                 class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group hover:text-red-400">
@@ -118,7 +118,7 @@ const showingNavigationDropdown = ref(false);
             </div>
         </aside>
         <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
-            <div class="sticky z-10 top-0 h-16 border-b bg-white lg:py-2.5">
+            <div class="sticky z-10 top-0 h-16 border-b bg-gray-500 lg:py-2.5">
                 <div class="px-6 flex items-center justify-between space-x-4 2xl:container">
                     <h5 hidden class="text-2xl text-gray-600 font-medium lg:block">Administración</h5>
                     <button class="w-12 h-16 -mr-2 border-r lg:hidden">
@@ -157,7 +157,7 @@ const showingNavigationDropdown = ref(false);
                     </div>
                 </div>
             </div>
-        
+
             <div class="px-6 pt-6 2xl:container">
                 <slot/>
             </div>

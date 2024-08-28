@@ -34,7 +34,10 @@ defineProps(['users'])
                                     <TableDataCell>{{user.id}}</TableDataCell>
                                     <TableDataCell>{{user.name}}</TableDataCell>
                                     <TableDataCell>{{user.email}}</TableDataCell>
-                                    <TableDataCell>Editar/Eliminar</TableDataCell>
+                                    <TableDataCell>
+                                        <Link :href="route('users.edit',user.id)" class="p-2 text-lg text-green-300 hover:text-indigo-700">Editar</Link>
+                                        <Link :href="route('users.destroy',user.id)" method="DELETE" as="button" class="p-2 text-lg text-red-500 hover:text-indigo-700">Eliminar</Link>
+                                    </TableDataCell>
                                 </TableRow>
                             </template>
                         </Table>

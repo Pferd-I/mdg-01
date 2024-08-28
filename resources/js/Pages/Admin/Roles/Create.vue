@@ -5,9 +5,15 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputErrorL from '@/Components/InputErrorLightContainer.vue';
+import VueMultiselect from 'vue-multiselect';
+
+defineProps({
+    permissions: Array,
+});
 
 const form= useForm({
     name: "",
+    permissions: [],
 })
 </script>
 
@@ -40,7 +46,18 @@ const form= useForm({
 
                                 <InputErrorL class="mt-2 dark:text-slate-950 dark:text-bold" :message="form.errors.name" />
                             </div>
-
+                            <div class="mt-3">
+                                <InputLabel class="dark:text-slate-900" for="permissions" value="Permisos" />
+                                <VueMultiselect class=" dark:border-slate-950 z-50"
+                                    v-model="form.permissions"
+                                    :options="permissions"
+                                    :multiple="true"
+                                    :close-on-select="true"
+                                    placeholder="Elija los permisos a asignar"
+                                    label="name"
+                                    track-by="id"
+                                />
+                            </div>
                             <div class="flex items-center mt-4">
                                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                     Crear
@@ -53,3 +70,4 @@ const form= useForm({
         </div>
     </AdminLayout>
 </template>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
