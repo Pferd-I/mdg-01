@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\UserSharedResource;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
-use App\Http\Resources\UserResource;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -33,7 +33,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth.user' => fn () => $request->user()
-                ? new UserResource($request->user())
+                ? new UserSharedResource($request->user())
                 : null,
             /*'auth.user.roles' => fn () => $request->user()
                 ? $request->user()->getRoleNames()

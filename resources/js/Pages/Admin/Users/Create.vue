@@ -5,12 +5,20 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import VueMultiselect from 'vue-multiselect';
+
+defineProps({
+    roles: Array,
+    permissions: Array,
+})
 
 const form = useForm({
     name: '',
     email: '',
     password: '',
     password_confirmation: '',
+    roles: [],
+    permissions: [],
 });
 
 const submit = () => {
@@ -71,7 +79,6 @@ const submit = () => {
                                 />
                                 <InputError class="mt-2" :message="form.errors.password" />
                             </div>
-
                             <div class="mt-4">
                                 <InputLabel for="password_confirmation" value="Confirmar Contraseña" />
                                 <TextInput
@@ -84,7 +91,34 @@ const submit = () => {
                                 />
                                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
                             </div>
-
+                            <div class="container">
+                                <div class="row flex">
+                                    <div class="mt-3 w-1/3 mx-3">
+                                        <InputLabel class="dark:text-slate-900" value="Roles" />
+                                        <VueMultiselect class=" dark:border-slate-950 z-50"
+                                            v-model="form.roles"
+                                            :options="roles"
+                                            :multiple="true"
+                                            :close-on-select="true"
+                                            placeholder="Elija los roles a asignar"
+                                            label="name"
+                                            track-by="id"
+                                        />
+                                    </div>
+                                    <div class="mt-3 w-1/3 mx-3">
+                                        <InputLabel class="dark:text-slate-900" value="Permisos" />
+                                        <VueMultiselect class=" dark:border-slate-950 z-50"
+                                            v-model="form.permissions"
+                                            :options="permissions"
+                                            :multiple="true"
+                                            :close-on-select="true"
+                                            placeholder="Elija los permisos a asignar"
+                                            label="name"
+                                            track-by="id"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                             <div class="flex items-center justify-end mt-4">
                                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                     Crear
@@ -98,3 +132,4 @@ const submit = () => {
 
     </AdminLayout>
 </template>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
