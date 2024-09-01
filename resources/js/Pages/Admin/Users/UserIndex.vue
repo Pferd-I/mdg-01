@@ -1,11 +1,30 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import {ref} from 'vue';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 import Table from '@/Components/Table/Table.vue';
 import TableRow from '@/Components/Table/TableRow.vue';
 import TableHeaderCell from '@/Components/Table/TableHeader.vue';
 import TableDataCell from '@/Components/Table/TableDataCell.vue';
-defineProps(['users'])
+import Modal from '@/Components/Modal.vue';
+import DangerButton from '@/Components/DangerButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+
+defineProps(['users']);
+const form = useForm({});
+
+const showConfirmDelUser = ref(false);
+const confirmDeleteUser = () => {
+    showConfirmDelUser.value = true;
+};
+const closeModal = () => {
+    showConfirmDelUser.value = false;
+};
+const deleteUser = (id) => {
+    form.delete(route('users.destroy', id), {
+        onSuccess: () => closeModal()
+    });
+};
 </script>
 
 <template>
@@ -36,7 +55,19 @@ defineProps(['users'])
                                     <TableDataCell>{{user.email}}</TableDataCell>
                                     <TableDataCell>
                                         <Link :href="route('users.edit',user.id)" class="p-2 text-lg text-green-300 hover:text-indigo-700">Editar</Link>
+                                        <!--
                                         <Link :href="route('users.destroy',user.id)" method="DELETE" as="button" class="p-2 text-lg text-red-500 hover:text-indigo-700">Eliminar</Link>
+                                        -->
+                                        <button @click="confirmDeleteUser" class="p-2 text-lg text-red-500 hover:text-indigo-700" >Eliminar</button>
+                                        <Modal :show="showConfirmDelUser" @close="closeModal">
+                                            <div class="p-6">
+                                                <h2 class="text-lg font-semibold text-slate-100">¿Está seguro de eliminar al usuario?</h2>
+                                                <div class="mt-6 flex space-x-4">
+                                                    <DangerButton @click="$event=>deleteUser(user.id)">Eliminar</DangerButton>
+                                                    <SecondaryButton @click="closeModal">Cancelar</SecondaryButton>
+                                                </div>
+                                            </div>
+                                        </Modal>
                                     </TableDataCell>
                                 </TableRow>
                             </template>
