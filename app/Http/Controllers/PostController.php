@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller{
     public function index(): Response{
@@ -18,6 +19,7 @@ class PostController extends Controller{
         ]);
     }
     public function create(): Response{
+        Gate::authorize('create', Post::class);
         return Inertia::render('Admin/Posts/Create');
     }
     public function store(CreatePostRequest $request): RedirectResponse{
@@ -25,6 +27,7 @@ class PostController extends Controller{
         return to_route('posts.index');
     }
     public function edit(Post $post):Response{
+        Gate::authorize('create', $post);
         return Inertia::render('Admin/Posts/Edit', [
             'post' => new PostResource($post)
         ]);

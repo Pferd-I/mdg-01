@@ -22,16 +22,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::resource('/users',UserController::class);
-Route::resource('/roles',RoleController::class);
-Route::resource('/permissions',PermissionController::class);
-Route::resource('/posts',PostController::class);
-Route::delete('/roles/{role}/permissions/{permission}', RevokePfRoleController::class)
-        ->name('roles.permissions.revoke');
-Route::delete('/user/{user}/roles/{role}', RevokeRfUserController::class)
-        ->name('users.roles.revoke');
-Route::delete('/user/{user}/permissions/{permission}', RevokePfUserController::class)
-        ->name('users.permissions.revoke');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -43,8 +33,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::resource('/users',UserController::class);
+    Route::resource('/roles',RoleController::class);
+    Route::resource('/permissions',PermissionController::class);
+    Route::delete('/roles/{role}/permissions/{permission}', RevokePfRoleController::class)
+            ->name('roles.permissions.revoke');
+    Route::delete('/user/{user}/roles/{role}', RevokeRfUserController::class)
+            ->name('users.roles.revoke');
+    Route::delete('/user/{user}/permissions/{permission}', RevokePfUserController::class)
+            ->name('users.permissions.revoke');
 });
+
+Route::resource('/posts',PostController::class)->middleware('role:admin|profesor');
 
 require __DIR__.'/auth.php';
