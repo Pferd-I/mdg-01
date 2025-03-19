@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Paralelo extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['title', 'subtitle', 'content'];
+    protected $fillable = ['nombre_paralelo','estado'];
 }

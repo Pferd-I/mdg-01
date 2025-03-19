@@ -15,6 +15,22 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors:{
+                //https://www.canva.com/colors/color-palettes/foil-covered-sneakers/
+                pewter: {
+                    DEFAULT: "#e9eaec",
+                    100: "#c2c0ef",
+                },
+                bluegray: {
+                    DEFAULT: "#90adc6",
+                },
+                darkblue: {
+                    DEFAULT: "#333652",
+                },
+                yellow: {
+                    DEFAULT: "#fad02c",
+                },
+            },
         },
     },
 

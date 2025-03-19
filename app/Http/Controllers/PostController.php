@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\Gate;
 class PostController extends Controller{
     public function index(): Response{
         $posts = Post::all();
+        $p = Post::select('id','title','subtitle','content','tipo')->get();
         return Inertia::render('Admin/Posts/PostIndex', [
             'posts' => PostResource::collection($posts)
         ]);
     }
     public function create(): Response{
-        Gate::authorize('create', Post::class);
+        //Gate::authorize('create', Post::class);
         return Inertia::render('Admin/Posts/Create');
     }
     public function store(CreatePostRequest $request): RedirectResponse{
@@ -27,7 +28,7 @@ class PostController extends Controller{
         return to_route('posts.index');
     }
     public function edit(Post $post):Response{
-        Gate::authorize('create', $post);
+        //Gate::authorize('create', $post);
         return Inertia::render('Admin/Posts/Edit', [
             'post' => new PostResource($post)
         ]);

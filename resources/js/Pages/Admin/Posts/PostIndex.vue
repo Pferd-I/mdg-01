@@ -13,7 +13,7 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 defineProps(['posts']);
 const form = useForm({});
-const { hasPermission} = usePermission();
+const { hasRole, hasPermission } = usePermission();
 
 const showConfirmDelPost = ref(false);
 const confirmDelPost = () => {

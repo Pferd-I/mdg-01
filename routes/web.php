@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -23,9 +24,11 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard', function () {
+/*Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');*/
+
+Route::get('/dashboard', [MainController::class, 'index'] )->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -46,6 +49,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
             ->name('users.permissions.revoke');
 });
 
-Route::resource('/posts',PostController::class)->middleware('role:admin|profesor');
+Route::middleware('auth')->prefix('/main')->group(function(){
+    Route::get('/', [MainController::class, 'index'])->name('main.index');
+});
+
+Route::resource('/posts',PostController::class);
 
 require __DIR__.'/auth.php';

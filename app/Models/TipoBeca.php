@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class TipoBeca extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'subtitle', 'content'];
+    protected $fillable = ['nombre_tipo_beca','descripcion','porcentaje','estado'];
 }
