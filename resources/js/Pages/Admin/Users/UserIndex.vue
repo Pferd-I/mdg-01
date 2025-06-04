@@ -33,10 +33,10 @@ const deleteUser = (id) => {
     <AdminLayout>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-between">
-                        <h1>Usuarios Registrados</h1>
-                        <Link :href="route('users.create')" class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded">Nuevo Usuario</Link>
+                <div class="bg-darkblue-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-100 flex justify-between">
+                        <h1 class="ml-4 text-2xl">Usuarios Registrados</h1>
+                        <Link :href="route('users.create')" class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded duration-300">Nuevo Usuario</Link>
                     </div>
                     <div class="mt-6">
                         <Table>

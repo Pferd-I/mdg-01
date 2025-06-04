@@ -3,15 +3,17 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Cliente;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class AdminSeeder extends Seeder
-{
+class AdminSeeder extends Seeder{
     /**
-     * Run the database seeds.
+     * Seeder para Tablas:
+     *  Usuarios
+     *  Clientes
      */
     public function run(): void{
         /*User::create([
@@ -32,6 +34,8 @@ class AdminSeeder extends Seeder
         $this->createUser('estTalita', 'est', 'estudiante');
         $this->createUser('estPaola', 'est', 'estudiante');
         $this->createUser('estMilca', 'est', 'estudiante');
+
+        $this->createCliente('2355648', 'Paola Gutierrez');
     }
     private function createUser(string $name, string $pwd, string $role){
         User::create([
@@ -41,5 +45,12 @@ class AdminSeeder extends Seeder
             'password' => Hash::make($pwd),
             'remember_token' => Str::random(10),
         ])->assignRole($role);
+    }
+
+    private function createCliente(string $ci, string $nom){
+        Cliente::create([
+            'cionit' => $ci,
+            'nombre' => $nom,
+        ]);
     }
 }

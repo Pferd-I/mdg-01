@@ -64,6 +64,14 @@ const openModal = (post) => {
                                     </template>
                                     <template #opcion>Configuración</template>
                                 </Option></a>
+                                <a class="block"><Option>
+                                    <template #img>
+                                        <img src="https://epicpadprinting.com/public/img/indus/Promotional.png"
+                                                    class="w-36 h-36  mt-6 m-auto" alt="Promotional" title="Promotional" loading="lazy"
+                                                    width="200" height="200">
+                                    </template>
+                                    <template #opcion>PPFF</template>
+                                </Option></a>
                             </div>
                         </div>
                     </section>

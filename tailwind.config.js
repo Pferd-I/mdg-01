@@ -26,6 +26,8 @@ export default {
                 },
                 darkblue: {
                     DEFAULT: "#333652",
+                    800: "#1f2937",
+                    700: "#374151",
                 },
                 yellow: {
                     DEFAULT: "#fad02c",

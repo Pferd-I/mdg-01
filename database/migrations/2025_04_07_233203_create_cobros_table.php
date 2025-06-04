@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo_becas', function (Blueprint $table) {
+        Schema::create('cobros', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_tipo_beca');
-            $table->string('descripcion');
-            $table->decimal('coeficiente',5,2)->default(0);  //Recomendado que los valores sean de 0 a 1
-            $table->boolean('estado')->default(true);
+            $table->integer('id_cliente');
+            $table->integer('id_estudiante');
+            $table->date('fecha');
+            $table->decimal('monto', 7, 2);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipo_becas');
+        Schema::dropIfExists('cobros');
     }
 };
