@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Cliente;
+use App\Models\Ppff;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -35,7 +35,7 @@ class AdminSeeder extends Seeder{
         $this->createUser('estPaola', 'est', 'estudiante');
         $this->createUser('estMilca', 'est', 'estudiante');
 
-        $this->createCliente('2355648', 'Paola Gutierrez');
+        $this->createPpff('2355648', 'Paola Gutierrez');
     }
     private function createUser(string $name, string $pwd, string $role){
         User::create([
@@ -47,8 +47,8 @@ class AdminSeeder extends Seeder{
         ])->assignRole($role);
     }
 
-    private function createCliente(string $ci, string $nom){
-        Cliente::create([
+    private function createPpff(string $ci, string $nom){
+        Ppff::create([
             'cionit' => $ci,
             'nombre' => $nom,
         ]);

@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('ppffs', function (Blueprint $table) {
             $table->id();
             $table->string('cionit');            //CI o NIT
             $table->string('nombre');
+            $table->string('direccion')->default("S/N");
+            $table->string('telf')->default('0');
             $table->boolean('estado')->default(true);
             $table->timestamps();
         });
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('ppffs');
     }
 };

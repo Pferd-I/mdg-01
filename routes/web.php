@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PpffController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PostController;
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('/users',UserController::class);
+    Route::resource('/ppffs',PpffController::class);
     Route::resource('/roles',RoleController::class);
     Route::resource('/permissions',PermissionController::class);
     Route::delete('/roles/{role}/permissions/{permission}', RevokePfRoleController::class)
