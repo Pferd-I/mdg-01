@@ -23,7 +23,7 @@ class PpffController extends Controller{
             'nombre' => 'required|string|max:255',
             'cionit' => 'required|string|max:20|unique:'.Ppff::class,
             'direccion' => 'string|max:255',
-            'telf' => 'required|numeric',
+            //'telf' => 'required|numeric',
         ]));
         /*$user = User::create([
             'name' => $request->name,

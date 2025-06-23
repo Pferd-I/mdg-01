@@ -58,7 +58,7 @@ const form= useForm({
                                         oninput="setCustomValidity('')"/>
                                     <InputErrorL class="mt-2 dark:text-slate-950 dark:text-bold" :message="form.errors.direccion" />
                                 </div>
-                                <!--Teléfono-->
+                                <!--Teléfono
                                 <div class="mt-2">
                                     <InputLabel for="telf" value="Nro. de Contacto:" class="dark:text-slate-900 *:text-lg" />
                                     <TextInput
@@ -67,7 +67,7 @@ const form= useForm({
                                         oninvalid="this.setCustomValidity('Por favor ingrese el nro. de contacto')"
                                         oninput="setCustomValidity('')"/>
                                     <InputErrorL class="mt-2 dark:text-slate-950 dark:text-bold" :message="form.errors.telf" />
-                                </div>
+                                </div>-->
                             </div>
                             <div class="flex items-center mt-4">
                                 <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

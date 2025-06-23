@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('estudiantes', function (Blueprint $table) {
             $table->id();
-            $table->string('ci');
-            $table->string('rude');
+            $table->string('ci')->default('0');
+            $table->string('rude')->default('0');
             $table->string('apellido_p');
             $table->string('apellido_m');
             $table->string('nombres');

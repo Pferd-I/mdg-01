@@ -44,6 +44,8 @@ const deletePpff = (id) => {
                                 <TableRow>
                                     <TableHeaderCell>CI</TableHeaderCell>
                                     <TableHeaderCell>Nombre</TableHeaderCell>
+                                    <TableHeaderCell>Dirección</TableHeaderCell>
+                                    <TableHeaderCell>Contacto</TableHeaderCell>
                                     <TableHeaderCell></TableHeaderCell>
                                 </TableRow>
                             </template>
@@ -51,6 +53,8 @@ const deletePpff = (id) => {
                                 <TableRow v-for="ppff in ppffs" :key="ppff.id" class="border-b">
                                     <TableDataCell>{{ppff.cionit}}</TableDataCell>
                                     <TableDataCell>{{ppff.nombre}}</TableDataCell>
+                                    <TableDataCell>{{ppff.direccion}}</TableDataCell>
+                                    <TableDataCell><Link class="p-2 text-lg text-blue-200 hover:text-indigo-700">Call</Link></TableDataCell>
                                     <TableDataCell>
                                         <Link class="p-2 text-lg text-blue-200 hover:text-indigo-700">Detalles</Link>
                                         <Link :href="route('ppffs.edit',ppff.id)" class="p-2 text-lg text-green-300 hover:text-indigo-700">Editar</Link>

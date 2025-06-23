@@ -35,7 +35,7 @@ class AdminSeeder extends Seeder{
         $this->createUser('estPaola', 'est', 'estudiante');
         $this->createUser('estMilca', 'est', 'estudiante');
 
-        $this->createPpff('2355648', 'Paola Gutierrez');
+        $this->createPpff('2355648', 'Paola Gutierrez', 'Calle del Olvido #1235');
     }
     private function createUser(string $name, string $pwd, string $role){
         User::create([
@@ -47,10 +47,11 @@ class AdminSeeder extends Seeder{
         ])->assignRole($role);
     }
 
-    private function createPpff(string $ci, string $nom){
+    private function createPpff(string $ci, string $nom, string $dir){
         Ppff::create([
             'cionit' => $ci,
             'nombre' => $nom,
+            'direccion' => $dir,
         ]);
     }
 }

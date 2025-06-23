@@ -9,11 +9,12 @@ return new class extends Migration{
      * Run the migrations.
      */
     public function up(): void{
-        Schema::create('ppffs', function (Blueprint $table) {
+        // 'id_dueno' vendrán de las columnas 'id' de las tablas Ppffs y Plantel.
+        Schema::create('contactos', function (Blueprint $table) {
             $table->id();
-            $table->string('cionit');            //CI o NIT
-            $table->string('nombre');
-            $table->string('direccion')->default("S/N");
+            $table->string('tipo_dueno');   //1:plantel, 2:ppff
+            $table->integer('id_dueno');
+            $table->string('telf');
             $table->boolean('estado')->default(true);
             $table->timestamps();
         });
@@ -22,7 +23,8 @@ return new class extends Migration{
     /**
      * Reverse the migrations.
      */
-    public function down(): void{
-        Schema::dropIfExists('ppffs');
+    public function down(): void
+    {
+        Schema::dropIfExists('contactos');
     }
 };

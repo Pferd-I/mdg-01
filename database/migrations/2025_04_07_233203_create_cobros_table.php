@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('id_cliente');
             $table->integer('id_estudiante');
+            $table->integer('idcajero')->default('1');  //id del Usuario quién cobró
             $table->date('fecha');
             $table->decimal('monto', 7, 2);
+            $table->string('descripcion');
             $table->timestamps();
         });
     }

@@ -9,11 +9,10 @@ return new class extends Migration{
      * Run the migrations.
      */
     public function up(): void{
-        Schema::create('ppffs', function (Blueprint $table) {
+        Schema::create('ppff__estudiantes', function (Blueprint $table) {
             $table->id();
-            $table->string('cionit');            //CI o NIT
-            $table->string('nombre');
-            $table->string('direccion')->default("S/N");
+            $table->integer('id_estudiante');
+            $table->integer('id_ppff');
             $table->boolean('estado')->default(true);
             $table->timestamps();
         });
@@ -22,7 +21,8 @@ return new class extends Migration{
     /**
      * Reverse the migrations.
      */
-    public function down(): void{
-        Schema::dropIfExists('ppffs');
+    public function down(): void
+    {
+        Schema::dropIfExists('ppff__estudiantes');
     }
 };
