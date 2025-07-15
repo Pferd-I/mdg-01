@@ -23,7 +23,7 @@ const form= useForm({
     <AdminLayout>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-gray-800 overflow-visible shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-between">
                         <h1>Crear Nuevo Rol</h1>
                         <Link :href="route('roles.index')" class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded">Volver</Link>

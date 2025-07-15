@@ -11,6 +11,8 @@ use App\Http\Controllers\RevokePfUserController;
 use App\Http\Controllers\RevokeRfUserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AulaController;
+use App\Http\Controllers\NivelController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -41,6 +43,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('/users',UserController::class);
     Route::resource('/ppffs',PpffController::class);
+    Route::resource('/aulas',AulaController::class);
+    Route::resource('/nivels',NivelController::class);
     Route::resource('/roles',RoleController::class);
     Route::resource('/permissions',PermissionController::class);
     Route::delete('/roles/{role}/permissions/{permission}', RevokePfRoleController::class)
@@ -49,6 +53,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
             ->name('users.roles.revoke');
     Route::delete('/user/{user}/permissions/{permission}', RevokePfUserController::class)
             ->name('users.permissions.revoke');
+    //Route::resource('/editnivel',EditNivelController::class)->name(,'nivels.edit');
 });
 
 Route::middleware('auth')->prefix('/main')->group(function(){

@@ -33,7 +33,7 @@ class PostController extends Controller{
             'post' => new PostResource($post)
         ]);
     }
-    public function update(CreatePostRequest $request, Post $post): RedirectResponse{
+    public function update(CreatePostRequest $request, Post $post){
         $post->update($request->validated());
         return to_route('posts.index');
     }

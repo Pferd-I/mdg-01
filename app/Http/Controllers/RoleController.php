@@ -69,14 +69,13 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CreateRoleRequest $request, string $id)
-    {
+    public function update(CreateRoleRequest $request, string $id){
         $role = Role::findById($id);
         $role->update([
             'name' => $request->name
         ]);
         $role->syncPermissions($request->input('permissions.*.name'));
-        return back();
+        return to_route('roles.index');
     }
 
     /**

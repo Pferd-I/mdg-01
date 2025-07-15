@@ -11,8 +11,8 @@ class CursoSeeder extends Seeder{
      * Run the database seeds.
      */
     public function run(): void{
-        $this->CrearCurso('Pre-Kinder', 0, 1, 1, 2025);
-        $this->CrearCurso('Kinder', 0, 1, 1, 2025);
+        $this->CrearCurso('Pre-Kinder', 'Pre-Kinder', 1, 1, 2025);
+        $this->CrearCurso('Kinder', 'Kinder', 1, 1, 2025);
 
         $this->CrearCurso('Primero', 1, 1, 2, 2025);
         $this->CrearCurso('Segundo', 2, 1, 2, 2025);
@@ -28,7 +28,7 @@ class CursoSeeder extends Seeder{
         $this->CrearCurso('Quinto', 5, 1, 3, 2025);
         $this->CrearCurso('Sexto', 6, 1, 3, 2025);
     }
-    private function CrearCurso(string $nom, int $nro, int $par, int $nivel, string $gestion){
+    private function CrearCurso(string $nom, string $nro, int $par, int $nivel, string $gestion){
         Curso::create([
             'grado' => $nom,
             'nro_grado' => $nro,

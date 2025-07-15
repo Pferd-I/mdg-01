@@ -21,9 +21,10 @@ class SecondaryTableSeeder extends Seeder{
     public function run(): void{
         $this->createParalelo('A');
 
-        $this->createNivel('Inicial');
-        $this->createNivel('Primaria');
-        $this->createNivel('Secundaria');
+        $this->createNivel('Inicial', true);
+        $this->createNivel('Primaria',true);
+        $this->createNivel('Secundaria',true);
+        $this->createNivel('Terciaria',false);
 
         $this->createTipoBeca('Sin beca','No hay descuento', 0);
         $this->createTipoBeca('Media beca','Descuento del 50%', 0.50);
@@ -46,9 +47,10 @@ class SecondaryTableSeeder extends Seeder{
             'nombre_paralelo' => $name,
         ]);
     }
-    private function createNivel(string $name){
+    private function createNivel(string $name, bool $estado){
         Nivel::create([
             'nombre_nivel' => $name,
+            'estado' => $estado,
         ]);
     }
     private function createTipoBeca(string $name, string $desc, float $coef){

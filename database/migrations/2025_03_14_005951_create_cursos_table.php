@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
             $table->string('grado');
-            $table->integer('nro_grado');
+            $table->string('nro_grado');
             $table->integer('id_paralelo')->default(1);
             $table->integer('id_nivel')->default(1);
             $table->string('gestion');
