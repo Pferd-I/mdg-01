@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateNivelRequest;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\Request;
@@ -40,7 +39,7 @@ class AulaController extends Controller{
         return DB::table('cursos AS C')
                     ->leftJoin('nivels AS N','C.id_nivel','=','N.id')
                     ->leftJoin('paralelos As P','C.id_paralelo','=','P.id')
-                    ->select('C.id','C.grado','C.nro_grado','N.nombre_nivel AS nivel','P.nombre_paralelo AS paralelo','C.gestion','C.estado')
+                    ->select('C.id','C.grado','C.nro_grado', 'C.id_nivel', 'N.nombre_nivel AS nivel', 'C.id_paralelo', 'P.nombre_paralelo AS paralelo','C.gestion','C.estado')
                     ->where('N.id', '=', $nivel)
                     ->get();
         /*$cursoSeleccionado = DB::table('cursos AS C')

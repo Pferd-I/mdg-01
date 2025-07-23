@@ -13,6 +13,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\NivelController;
+use App\Http\Controllers\CursoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::resource('/ppffs',PpffController::class);
     Route::resource('/aulas',AulaController::class);
     Route::resource('/nivels',NivelController::class);
+    Route::resource('/cursos',CursoController::class);
     Route::resource('/roles',RoleController::class);
     Route::resource('/permissions',PermissionController::class);
     Route::delete('/roles/{role}/permissions/{permission}', RevokePfRoleController::class)
