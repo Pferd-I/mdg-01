@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\NivelController;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\ParaleloController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -46,6 +47,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::resource('/ppffs',PpffController::class);
     Route::resource('/aulas',AulaController::class);
     Route::resource('/nivels',NivelController::class);
+    Route::resource('/paralelos',ParaleloController::class);
     Route::resource('/cursos',CursoController::class);
     Route::resource('/roles',RoleController::class);
     Route::resource('/permissions',PermissionController::class);
@@ -55,6 +57,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
             ->name('users.roles.revoke');
     Route::delete('/user/{user}/permissions/{permission}', RevokePfUserController::class)
             ->name('users.permissions.revoke');
+
     //Route::resource('/editnivel',EditNivelController::class)->name(,'nivels.edit');
 });
 
