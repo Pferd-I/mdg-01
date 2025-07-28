@@ -27,7 +27,7 @@ class CreateParaleloRequest extends FormRequest{
      */
     public function rules(): array{
         return [
-            'nombre_paralelo' => ['required','string', 'max:20', Rule::unique('paralelos','nombre_paralelo')->ignore($this->nivel)],
+            'nombre_paralelo' => ['required','string', 'max:20', Rule::unique('paralelos','nombre_paralelo')->ignore($this->paralelo)],
             'estado' => [],
         ];
     }

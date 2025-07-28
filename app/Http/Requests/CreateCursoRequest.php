@@ -28,10 +28,11 @@ class CreateCursoRequest extends FormRequest{
     public function rules(): array{
         return [
             'grado' => ['required','string', 'max:20'],
-            'nro_grado' =>[],
-            'id_nivel' =>[],
-            'id_paralelo' =>[],
-            'gestion' =>[],
+            'nro_grado' => [],
+            'id_nivel' => [],
+            'id_paralelo' => [],
+            'gestion' => [],
+            'estado' => [],
         ];
     }
 }
