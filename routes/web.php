@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\NivelController;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\MensualidadController;
 use App\Http\Controllers\ParaleloController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::resource('/nivels',NivelController::class);
     Route::resource('/paralelos',ParaleloController::class);
     Route::resource('/cursos',CursoController::class);
+    Route::resource('/mensualidades', MensualidadController::class);
     Route::resource('/roles',RoleController::class);
     Route::resource('/permissions',PermissionController::class);
     Route::delete('/roles/{role}/permissions/{permission}', RevokePfRoleController::class)

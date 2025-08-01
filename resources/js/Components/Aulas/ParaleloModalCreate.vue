@@ -22,8 +22,7 @@ function crearParalelo() {
 };
 </script>
 <template>
-    <modal-overlay>
-        <button-x @click="$emit('close',false)"/>
+    <modal-overlay @cerrar="$emit('close')">
         <modal-content>
             <template #default>
                 <modal-form @submit.prevent="crearParalelo">

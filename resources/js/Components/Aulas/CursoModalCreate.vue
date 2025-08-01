@@ -31,8 +31,7 @@ function crearCurso(){
 };
 </script>
 <template>
-    <modal-overlay>
-        <button-x @click="$emit('close')"/>
+    <modal-overlay @cerrar="$emit('close')">
         <modal-content>
             <template #default>
                 <modal-form @submit.prevent="crearCurso">

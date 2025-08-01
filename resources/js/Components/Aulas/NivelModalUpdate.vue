@@ -28,8 +28,7 @@ function guardarNivel(){
 };
 </script>
 <template>
-    <modal-overlay>
-        <button-x @click="$emit('close')"/>
+    <modal-overlay @cerrar="$emit('close')">
         <modal-content class=" text-pewter">
             <template #default>
                 <modal-form @submit.prevent="guardarNivel">

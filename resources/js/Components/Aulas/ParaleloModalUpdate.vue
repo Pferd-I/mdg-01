@@ -25,9 +25,8 @@ function eliminar(){
 }
 </script>
 <template>
-    <div class="modal-overlay z-40">
+    <div class="modal-overlay z-40" @click.self="$emit('close')">
         <div class="p-1 bg-darkblue rounded-md w-min">
-            <div class="z-50" @click="$emit('close')">X</div>
             <div class="p-1 bg-pewter rounded-md">
                 <div class="modal-content p-4 w-auto h-1/5 bg-darkblue">
                     <form @submit.prevent="guardarCambios" class="text-slate-900 overflow-hidden">
@@ -59,3 +58,22 @@ function eliminar(){
         </div>
     </div>
 </template>
+
+<style scoped>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+</style>

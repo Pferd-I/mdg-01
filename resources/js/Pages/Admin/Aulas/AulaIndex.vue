@@ -12,8 +12,8 @@ import ParCreate from '@/Components/Aulas/ParaleloModalCreate.vue';
 import ParUpdate from '@/Components/Aulas/ParaleloModalUpdate.vue';
 import CurCreate from '@/Components/Aulas/CursoModalCreate.vue';
 import CurUpdate from '@/Components/Aulas/CursoModalUpdate.vue';
-import ButtonPlus from '@/Components/Aulas/SubComponentes/ButtonPlus.vue';
-import Pencil from '@/Components/Aulas/SubComponentes/ButtonPencil.vue';
+import ButtonPlus from '@/Components/Subcomponents/ButtonPlus.vue';
+import Pencil from '@/Components/Subcomponents/ButtonPencil.vue';
 
 const props = defineProps({
     niveles: Object,
