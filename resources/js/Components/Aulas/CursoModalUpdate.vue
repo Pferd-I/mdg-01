@@ -1,9 +1,9 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import ModalOverlay from '@/Components/Aulas/SubComponentes/ModalOverlay.vue';
-import ButtonX from '@/Components/Aulas/SubComponentes/ModalOberlayXButton.vue';
-import ModalContent from '@/Components/Aulas/SubComponentes/ModalContent.vue';
-import ModalForm from '@/Components/Aulas/SubComponentes/ModalForm.vue';
+import ModalOverlay from '@/Components/Subcomponents/ModalOverlay.vue';
+import ButtonX from '@/Components/Subcomponents/ModalOberlayXButton.vue';
+import ModalContent from '@/Components/Subcomponents/ModalContent.vue';
+import ModalForm from '@/Components/Subcomponents/ModalForm.vue';
 import PrimaryButton from '@/Components/SecondaryButtonModal.vue';
 
 const props = defineProps({
@@ -36,8 +36,7 @@ function eliminarCurso(){
 }
 </script>
 <template>
-    <modal-overlay>
-        <button-x @click="$emit('close')"/>
+    <modal-overlay @cerrar="$emit('close')">
         <modal-content>
             <template #default>
                 <modal-form @submit.prevent="guardarCambios">

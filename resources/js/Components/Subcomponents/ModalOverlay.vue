@@ -1,8 +1,11 @@
 <script setup>
-import ButtonX from '@/Components/Aulas/SubComponentes/ModalOberlayXButton.vue';
+import ButtonX from '@/Components/Subcomponents/ModalOberlayXButton.vue';
+const emit = defineEmits([
+    'cerrar',
+]);
 </script>
 <template>
-    <div class="modal-overlay z-40">
+    <div class="modal-overlay z-40" @click.self="$emit('cerrar')">
         <div class="p-1 bg-darkblue rounded-md w-min">
             <slot/>
         </div>

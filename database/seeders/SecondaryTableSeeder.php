@@ -27,9 +27,9 @@ class SecondaryTableSeeder extends Seeder{
         $this->createNivel('Terciaria',false);
 
         $this->createTipoBeca('Sin beca','No hay descuento', 0);
-        $this->createTipoBeca('Media beca','Descuento del 50%', 0.50);
-        $this->createTipoBeca('Beca por tercer hermano','Beca del 100% por ser el tercer hermano inscrito', 1);
-        $this->createTipoBeca('Beca por excelencia','Beca del 100% por excelencia académica', 1);
+        $this->createTipoBeca('Media beca','Descuento del 50%', 50);
+        $this->createTipoBeca('Beca por tercer hermano','Beca del 100% por ser el tercer hermano inscrito', 100);
+        $this->createTipoBeca('Beca por excelencia','Beca del 100% por excelencia académica', 100);
 
         $this->createMensualidad(2025, 1, 'Febrero', 500);
         $this->createMensualidad(2025, 2, 'Marzo', 500);
@@ -53,11 +53,11 @@ class SecondaryTableSeeder extends Seeder{
             'estado' => $estado,
         ]);
     }
-    private function createTipoBeca(string $name, string $desc, float $coef){
+    private function createTipoBeca(string $name, string $desc, float $dcto){
         TipoBeca::create([
             'nombre_tipo_beca' => $name,
             'descripcion' => $desc,
-            'coeficiente' => $coef,
+            'dcto' => $dcto,
         ]);
     }
     private function createMensualidad(int $gestion, int $nro_mes, string $nombre_mes, float $monto){

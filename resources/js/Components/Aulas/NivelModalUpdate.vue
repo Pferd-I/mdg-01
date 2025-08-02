@@ -1,11 +1,9 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import ModalOverlay from '@/Components/Aulas/SubComponentes/ModalOverlay.vue';
-import ButtonX from '@/Components/Aulas/SubComponentes/ModalOberlayXButton.vue';
-import ModalContent from '@/Components/Aulas/SubComponentes/ModalContent.vue';
-import ModalForm from '@/Components/Aulas/SubComponentes/ModalForm.vue'
+import ModalOverlay from '@/Components/Subcomponents/ModalOverlay.vue';
+import ModalContent from '@/Components/Subcomponents/ModalContent.vue';
+import ModalForm from '@/Components/Subcomponents/ModalForm.vue';
 import PrimaryButton from '@/Components/SecondaryButtonModal.vue';
-import InputError from '@/Components/InputError.vue';
 const props = defineProps({
     nivel: Object,
 });
@@ -28,8 +26,7 @@ function guardarNivel(){
 };
 </script>
 <template>
-    <modal-overlay>
-        <button-x @click="$emit('close')"/>
+    <modal-overlay @cerrar="$emit('close')">
         <modal-content class=" text-pewter">
             <template #default>
                 <modal-form @submit.prevent="guardarNivel">

@@ -18,11 +18,6 @@ class AulaController extends Controller{
     public function index(): Response{
         $niveles = NivelResource::collection(Nivel::all());
         $paralelos = ParaleloResource::collection(Paralelo::all());
-        /*$cursosInicial = DB::table('cursos AS C')
-                    ->leftJoin('nivels AS N','C.id_nivel','=','N.id')
-                    ->leftJoin('paralelos As P','C.id_paralelo','=','P.id')
-                    ->select('C.id','C.grado','C.nro_grado','N.nombre_nivel AS nivel','P.nombre_paralelo AS paralelo','C.gestion','C.estado')
-                    ->get();*/
         $cursosInicial = $this->obtenerCurso(1);
         $cursosPrimaria = $this->obtenerCurso(2);
         $cursosSecundaria = $this->obtenerCurso(3);
@@ -32,7 +27,6 @@ class AulaController extends Controller{
             'cursosInicial' => $cursosInicial,
             'cursosPrimaria' => $cursosPrimaria,
             'cursosSecundaria' => $cursosSecundaria,
-            //'cursos' => CursoResource::collection(Curso::all()),
         ]);
     }
     private function obtenerCurso(int $nivel){
