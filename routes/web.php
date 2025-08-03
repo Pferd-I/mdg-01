@@ -49,6 +49,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::resource('/ppffs',PpffController::class);
     Route::resource('/aulas',AulaController::class);
     Route::resource('/nivels',NivelController::class);
+    Route::resource('/mensualidades',MensualidadController::class);
+    Route::resource('/tipobecas',TipoBecaController::class);
     Route::resource('/paralelos',ParaleloController::class);
     Route::resource('/cursos',CursoController::class);
     Route::resource('/roles',RoleController::class);
