@@ -115,7 +115,7 @@ const Cur_openModal = (curso) => {
                                     </TableRow>
                                 </template>
                                 <template #default>
-                                    <TableRow class="border-t" v-for="P in paralelos" :key="P.id"  :class="{'dark:bg-red-800': !P.estado}">
+                                    <TableRow class="border-t" v-for="P in paralelos" :key="P.id" :class="{'dark:bg-red-800': !P.estado}">
                                         <TableDataCell v-if="P.estado || Par_mostrarBorrados">{{P.nombre_paralelo}}
                                         </TableDataCell>
                                         <TableDataCell v-if="P.estado || Par_mostrarBorrados">

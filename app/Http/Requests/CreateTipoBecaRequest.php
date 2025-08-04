@@ -14,10 +14,10 @@ class CreateTipoBecaRequest extends FormRequest{
     }
     public function messages(){
         return[
-            'required'=> 'Se requiere un nombre para el campo.',
-            'max' => 'Por favor, coloque un nombre más corto.',
-            'unique' => 'Ese curso ya existe.',
-            'between' => 'El valor está fuera del rango.',
+            'required'=> 'Este campo es requerido.',
+            'max' => 'Por favor, coloque menos caracteres.',
+            'unique' => 'Esa beca ya existe.',
+            'between' => 'El valor debe estar entre 0 y 100.',
             'numeric' => 'Por favor, coloque un número en Descuento.',
         ];
     }
@@ -32,9 +32,9 @@ class CreateTipoBecaRequest extends FormRequest{
             'descripcion' => ['string'],
             'dcto' => ['required', 'between:0,100', 'numeric'],
             'estado' => [],*/
-            'nombre_tipo_beca' => [],
-            'descripcion' => [],
-            'dcto' => [],
+            'nombre_tipo_beca' => ['required', 'max:25', Rule::unique('tipo_becas','nombre_tipo_beca')->ignore($this->tipobecas)],
+            'descripcion' => ['required', 'max:150'],
+            'dcto' => ['numeric','between:0,100'],
             'estado' => [],
         ];
     }
