@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\Gestion;
 use App\Models\Paralelo;
 use App\Models\Nivel;
 use App\Models\TipoBeca;
@@ -20,6 +20,9 @@ class SecondaryTableSeeder extends Seeder{
      */
     public function run(): void{
         $this->createParalelo('A');
+
+        $this->createGestion(2024,false);
+        $this->createGestion(2025, true);
 
         $this->createNivel('Inicial', true);
         $this->createNivel('Primaria',true);
@@ -41,6 +44,12 @@ class SecondaryTableSeeder extends Seeder{
         $this->createMensualidad(2025, 8, 'Septiembre', 500);
         $this->createMensualidad(2025, 9, 'Octubre', 500);
         $this->createMensualidad(2025, 10, 'Noviembre', 500);
+    }
+    private function createGestion(int $gestion, bool $presente){
+        Gestion::create([
+            'gestion' => $gestion,
+            'presente' => $presente,
+        ]);
     }
     private function createParalelo(string $name){
         Paralelo::create([
