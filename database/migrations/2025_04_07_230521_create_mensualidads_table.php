@@ -13,7 +13,7 @@ return new class extends Migration{
             $table->id();
             $table->integer('nro_mes');
             $table->string('nombre_mes');
-            $table->integer('gestion');
+            $table->foreignId('id_gestion')->constrained('gestions');     //Foreign Gestion
             $table->decimal('monto', 6, 2);
             $table->boolean('estado')->default(true);
             $table->timestamps();

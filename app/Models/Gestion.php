@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gestion extends Model{
     use HasFactory;
-     protected $fillable = ['gestion', 'presente', 'estado'];
+    protected $fillable = ['gestion', 'presente', 'estado'];
+    public function mensualidades(){
+        return $this->hasMany(Mensualidad::class, 'id_gestion');
+    }
 }

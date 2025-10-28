@@ -4,13 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration{
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void{
         Schema::create('estudiantes', function (Blueprint $table) {
             $table->id();
             $table->string('ci')->default('0');
@@ -18,8 +16,10 @@ return new class extends Migration
             $table->string('apellido_p');
             $table->string('apellido_m');
             $table->string('nombres');
-            $table->integer('id_tipo_beca')->default(1);
-            $table->integer('id_curso')->default(1);
+            /*$table->integer('id_tipo_beca')->default(1);
+            $table->integer('id_curso')->default(1);*/
+            $table->foreignId('id_tipo_beca')->constrained('tipo_becas');
+            $table->foreignId('id_curso')->constrained('cursos');
             $table->boolean('estado')->default(true);
             $table->timestamps();
         });

@@ -1,7 +1,7 @@
 <script setup>
 import {computed, ref, reactive } from 'vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, router } from '@inertiajs/vue3';
 
 import Table from '@/Components/Table/Table.vue';
 import TableRow from '@/Components/Table/TableRow.vue';
@@ -14,21 +14,41 @@ import Info from '@/Components/Subcomponents/ButtonInfo.vue';
 import TbModalCreate from '@/Components/Mensualidades/TipoBModalCreate.vue';
 import TbModalInfo from '@/Components/Mensualidades/TipoBModalInfo.vue';
 import TbModalUpdate from '@/Components/Mensualidades/TipoBModalUpdate.vue';
+import GeModalCreate from '@/Components/Mensualidades/GestionModalCreate.vue';
+import MensInfo from '@/Components/Mensualidades/MensualidadesInfo.vue';
 
 const props = defineProps({
-    'tipobecas':Object,
+    'tipobecas': Object,
+    'gestiones': Object,
 });
 
 const showAllTb = ref(false);
+
+const showGeCrea = ref(false);
+const showMnInfo = ref(false);
 
 const showTbCrea = ref(false);
 const showTbInfo = ref(false);
 const showTbUpda = ref(false);
 const selectedTB = ref(null);
 
-function TB_openCrea(){
-    showTbCrea.value = true;
+const selectedGestion = ref(null)
+const mensualidades = ref([])
+
+function Ge_openCrea(){ showGeCrea.value = true;}
+function TB_openCrea(){ showTbCrea.value = true;}
+
+function Mn_openInfo(gestion){
+    selectedGestion.value = gestion;
+    showMnInfo.value = true;
+
+    fetch(`/admin/gestiones/${gestion.id}/mensualidades`)
+        .then(res => res.json())
+        .then(data => {
+            mensualidades.value = data;
+        });
 }
+
 function TB_openInfo(tipobeca){
     selectedTB.value = tipobeca;
     showTbInfo.value = true;
@@ -53,8 +73,31 @@ function TB_openUpda(tipobeca){
                             </div>
                         </div>
                     </div>
+                    <!--Tabla de Mensualidades-->
+                    <div class="mt-2 mx-2 bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg w-auto h-min">
+                        <div class="mt-6">
+                            <Table class="overflow-hidden">
+                                <template #header>
+                                    <TableRow>
+                                        <TableHeaderCell>Mensualidades</TableHeaderCell>
+                                        <TableHeaderCell>
+                                            <Plus @click.prevent="Ge_openCrea"/>
+                                        </TableHeaderCell>
+                                    </TableRow>
+                                </template>
+                                <template #default>
+                                    <TableRow v-for="gestion in gestiones" :key="gestion.id" class="border-t" :class="{'dark:bg-red-800': !gestion.estado}">
+                                        <TableDataCell class="max-w-56 overflow-hidden" v-if="gestion.estado || showAllTb">{{gestion.gestion}}</TableDataCell>
+                                        <TableDataCell v-if="gestion.estado || showAllGes">
+                                            <Info @click.prevent="Mn_openInfo(gestion)" class="mr-2"/>
+                                        </TableDataCell>
+                                    </TableRow>
+                                </template>
+                            </Table>
+                        </div>
+                    </div>
                     <!--Tabla de Tipo de Becas-->
-                    <div class="mx-2 bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg w-auto h-min">
+                    <div class="mt-2 mx-2 bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg w-auto h-min">
                         <div class="mt-6">
                             <Table class="overflow-hidden">
                                 <template #header>
@@ -85,6 +128,10 @@ function TB_openUpda(tipobeca){
                     <tb-modal-update v-if="showTbUpda" :tipobeca="selectedTB" @close="showTbUpda = false"/>
                     <!--Modal de Tipos de Becas Create-->
                     <tb-modal-create v-if="showTbCrea" @close="showTbCrea = false"/>
+                    <!--Modal de Gestión Create-->
+                    <ge-modal-create v-if="showGeCrea" @close="showGeCrea = false"/>
+                    <!--Modal de Gestión->Mensualidad Info-->
+                    <mens-info v-if="showMnInfo" :gestion="selectedGestion" :mensualidades="mensualidades" @close="showMnInfo = false"/>
                 </div>
             </div>
         </div>

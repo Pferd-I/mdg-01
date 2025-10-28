@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CreateGestionMensController;
 use App\Http\Controllers\PpffController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PermissionController;
@@ -45,16 +46,18 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-    Route::resource('/users',UserController::class);
-    Route::resource('/ppffs',PpffController::class);
     Route::resource('/aulas',AulaController::class);
-    Route::resource('/nivels',NivelController::class);
-    Route::resource('/mensualidades',MensualidadController::class);
-    Route::resource('/tipobecas',TipoBecaController::class);
-    Route::resource('/paralelos',ParaleloController::class);
     Route::resource('/cursos',CursoController::class);
-    Route::resource('/roles',RoleController::class);
+    Route::resource('/mensualidades',MensualidadController::class);
+    Route::resource('/nivels',NivelController::class);
+    Route::resource('/paralelos',ParaleloController::class);
     Route::resource('/permissions',PermissionController::class);
+    Route::resource('/ppffs',PpffController::class);
+    Route::resource('/roles',RoleController::class);
+    Route::resource('/tipobecas',TipoBecaController::class);
+    Route::resource('/users',UserController::class);
+    Route::get('/gestion&mensualidades', CreateGestionMensController::class)
+            ->name('gestion.mensualidades.create');
     Route::delete('/roles/{role}/permissions/{permission}', RevokePfRoleController::class)
             ->name('roles.permissions.revoke');
     Route::delete('/user/{user}/roles/{role}', RevokeRfUserController::class)
@@ -62,6 +65,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::delete('/user/{user}/permissions/{permission}', RevokePfUserController::class)
             ->name('users.permissions.revoke');
 
+    Route::get('/gestiones/{gestion}/mensualidades', [MensualidadController::class, 'mensualidades'])
+            ->name('gestiones.mensualidades');
     //Route::resource('/editnivel',EditNivelController::class)->name(,'nivels.edit');
 });
 
@@ -72,3 +77,5 @@ Route::middleware('auth')->prefix('/main')->group(function(){
 Route::resource('/posts',PostController::class);
 
 require __DIR__.'/auth.php';
+
+
