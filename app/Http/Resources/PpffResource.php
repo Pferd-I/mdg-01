@@ -16,8 +16,6 @@ class PpffResource extends JsonResource{
             'id' => $this->id,
             'cionit' => $this->cionit,
             'nombre' => $this->nombre,
-            'direccion' => $this->direccion,
-            'telf' => $this->telf,
         ];
     }
 }

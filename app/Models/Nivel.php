@@ -9,4 +9,9 @@ class Nivel extends Model
 {
     use HasFactory;
     protected $fillable = ['nombre_nivel','estado'];
+
+    //Referencias de otras tablas
+    public function cursos(){
+        return $this->hasMany(Curso::class, 'id_nivel');
+    }
 }

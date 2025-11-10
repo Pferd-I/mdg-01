@@ -9,10 +9,11 @@ return new class extends Migration{
      * Run the migrations.
      */
     public function up(): void{
-        Schema::create('ppff__estudiantes', function (Blueprint $table) {
+        Schema::create('ppff_estudiantes', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_estudiante');
-            $table->integer('id_ppff');
+            $table->foreignId('id_estudiante')->constrained('estudiantes')->onDelete('cascade');
+            $table->foreignId('id_ppff')->constrained('ppffs')->onDelete('cascade');
+            $table->string('parentesco')->default('Tutor');
             $table->boolean('estado')->default(true);
             $table->timestamps();
         });
@@ -21,8 +22,7 @@ return new class extends Migration{
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('ppff__estudiantes');
+    public function down(): void{
+        Schema::dropIfExists('ppff_estudiantes');
     }
 };

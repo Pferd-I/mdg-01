@@ -18,6 +18,36 @@ class PpffController extends Controller{
     public function create(): Response{
          return Inertia::render('Admin/Ppffs/Create');
     }
+
+    public function edit(string $id){
+        $ppff = Ppff::with('contactos', 'estudiantes')->findOrFail($id);
+        return Inertia::render('Admin/Ppffs/Edit',[
+            'ppff' => $ppff,
+        ]);
+    }
+
+    public function update(Request $request, $id){
+        $ppff = Ppff::findOrFail($id);
+
+        $validated = $request->validate([
+            'cionit' => 'required|string',
+            'nombre' => 'required|string',
+            'contactos' => 'array',
+            'contactos.*.telefono' => 'nullable|string',
+            'contactos.*.direccion' => 'nullable|string',
+        ]);
+
+        $ppff->update($validated);
+        $ppff->contactos()->delete();
+
+        if (!empty($validated['contactos'])) {
+            foreach ($validated['contactos'] as $contacto) {
+                $ppff->contactos()->create($contacto);
+            };
+        };
+        return redirect()->route('ppffs.index')->with('success', 'Datos actualizados correctamente.');
+    }
+
     public function store(Request $request): RedirectResponse{
         Ppff::create( $request->validate([
             'nombre' => 'required|string|max:255',

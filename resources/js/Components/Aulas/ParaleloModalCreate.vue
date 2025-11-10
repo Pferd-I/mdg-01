@@ -29,7 +29,7 @@ function crearParalelo() {
                     <label class="text-pewter" for="nombre_paralelo">Paralelo: </label>
                     <input class="w-32" id="nombre_paralelo" type="text" v-model="form.nombre_paralelo">
                     <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Crearw
+                        Crear
                     </PrimaryButton>
                     <InputError class="mt-2 text-red-600 dark:text-bold" :message="form.errors.nombre_paralelo" />
                 </modal-form>

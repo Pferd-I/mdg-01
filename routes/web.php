@@ -15,6 +15,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\NivelController;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\MensualidadController;
 use App\Http\Controllers\ParaleloController;
 use App\Http\Controllers\TipoBecaController;
@@ -48,6 +49,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('/aulas',AulaController::class);
     Route::resource('/cursos',CursoController::class);
+    //Estudiantes
+    Route::resource('/estudiantes',EstudianteController::class);
+    Route::get('/estudiantes/{id}/get', [EstudianteController::class, 'getEstudiante'])->name('estudiantes.get');
+    Route::post('/estudiantes/{id}/{par}/add-padre', [EstudianteController::class, 'addPpff'])->name('estudiantes.addPpff');
+    Route::delete('/estudiantes/{id_estudiante}/padre/{id_ppff}', [EstudianteController::class, 'removePpff'])->name('estudiantes.removePpff');
+
     Route::resource('/mensualidades',MensualidadController::class);
     Route::resource('/nivels',NivelController::class);
     Route::resource('/paralelos',ParaleloController::class);

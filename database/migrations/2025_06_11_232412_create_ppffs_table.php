@@ -13,7 +13,6 @@ return new class extends Migration{
             $table->id();
             $table->string('cionit');            //CI o NIT
             $table->string('nombre');
-            $table->string('direccion')->default("S/N");
             $table->boolean('estado')->default(true);
             $table->timestamps();
         });

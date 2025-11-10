@@ -4,19 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration{
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void{
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
             $table->string('grado');
             $table->string('nro_grado');
-            $table->integer('id_paralelo')->default(1);
-            $table->integer('id_nivel')->default(1);
+            $table->foreignId('id_paralelo')->constrained('paralelos')->onDelete('cascade');
+            $table->foreignId('id_nivel')->constrained('nivels')->onDelete('cascade');
             $table->string('gestion');
             $table->boolean('estado')->default(true);
             $table->timestamps();
@@ -26,8 +24,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void{
         Schema::dropIfExists('cursos');
     }
 };

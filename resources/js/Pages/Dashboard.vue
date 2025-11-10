@@ -48,7 +48,7 @@ const openModal = (post) => {
                                     </template>
                                     <template #opcion>Comunicados</template>
                                 </Option></a>
-                                <a class="block"><Option>
+                                <a :href="route('estudiantes.index')" class="block"><Option>
                                     <template #img>
                                         <img src="https://epicpadprinting.com/public/img/indus/Stationery.png"
                                                     class="w-36 h-36  mt-6 m-auto" alt="Stationery" title="Stationery" loading="lazy"
@@ -64,7 +64,7 @@ const openModal = (post) => {
                                     </template>
                                     <template #opcion>Configuración</template>
                                 </Option></a>
-                                <a class="block"><Option>
+                                <a :href="route('ppffs.index')" class="block"><Option>
                                     <template #img>
                                         <img src="https://epicpadprinting.com/public/img/indus/Promotional.png"
                                                     class="w-36 h-36  mt-6 m-auto" alt="Promotional" title="Promotional" loading="lazy"
