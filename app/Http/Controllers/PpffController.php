@@ -5,14 +5,44 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Resources\PpffResource;
+use App\Models\Estudiante;
 use App\Models\Ppff;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class PpffController extends Controller{
-    public function index(): Response{
-        return Inertia::render('Admin/Ppffs/PpffIndex', [
-            'ppffs' => PpffResource::collection(Ppff::all())
+    public function index(Request $request): Response{
+        $query = Ppff::with('contactos', 'estudiantes');
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('cionit', 'like', "%$search%")
+                  ->orWhere('nombre', 'like', "%$search%");
+            });
+        };
+
+        $ppffs = $query->get();
+        return Inertia::render('Admin/Ppffs/PpffIndex',[
+            'ppffs' => $ppffs,
+            'search' => $request->search,
+        ]);
+    }
+    public function show($id){
+        $ppff = Ppff::with(['contactos', 'estudiantes'])->findOrFail($id);
+        $ppff->todos_estudiantes = Estudiante::all();
+
+        return Inertia::render('@/Components/Estudiantes/EstudianteModalInfo.vue', [
+            'ppff' => $ppff,
+        ]);
+    }
+    public function getPpff($id){
+        $ppff = Ppff::with(['contactos', 'estudiantes'])->findOrFail($id);
+        $estudiantes = Ppff::all();
+
+        return response()->json([
+            'ppff' => $ppff,
+            'estudiantes' => $estudiantes,
         ]);
     }
     public function create(): Response{

@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from 'vue';
+import {ref, watch} from 'vue';
 import { Head, Link, useForm, router} from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Table from '@/Components/Table/Table.vue';
@@ -11,6 +11,7 @@ import DangerButton from '@/Components/DangerButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import ButtonContact from '@/Components/Subcomponents/ButtonContact.vue';
 import Pencil from '@/Components/Subcomponents/ButtonPencil.vue';
+import PpffCont from '@/Components/Ppffs/PpffModalInfo.vue';
 
 defineProps(['ppffs']);
 
@@ -29,6 +30,29 @@ const deletePpff = (id) => {
         onSuccess: () => closeModal()
     });
 };
+
+//Abrir Contacto
+const P_showModal_I = ref(false);
+const selectedPpff = ref(null);
+function showContacto(ppff){
+    P_showModal_I.value = true;
+    selectedPpff.value = ppff;
+}
+
+//Búsqueda
+const busqueda = ref('');
+let timeout = null;
+
+watch(busqueda, (nuevoValor) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        router.get(
+            route('ppffs.index'),
+            { search: nuevoValor },
+            { preserveState: true, replace: true }
+        );
+    }, 400);
+});
 </script>
 
 <template>
@@ -42,6 +66,7 @@ const deletePpff = (id) => {
                         <h1 class="ml-3 text-2xl">Padres de Familia y Tutores</h1>
                         <Link :href="route('ppffs.create')" class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded duration-300">Nuevo PPFF</Link>
                     </div>
+                    <label for="busqueda"/> <input v-model="busqueda" id="busqueda" type="text" placeholder="Buscar estudiante..." class="m-3 border rounded px-3 py-2 w-11/12"/>
                     <div class="mt-6">
                         <Table>
                             <template #header>
@@ -56,11 +81,8 @@ const deletePpff = (id) => {
                                     <TableDataCell>{{ppff.cionit}}</TableDataCell>
                                     <TableDataCell>{{ppff.nombre}}</TableDataCell>
                                     <TableDataCell>
-                                        <ButtonContact/>
+                                        <ButtonContact @click="showContacto(ppff)"/>
                                         <Pencil @click="editPpff(ppff.id)" class="p-2 text-lg text-green-300 hover:text-indigo-700">Editar</Pencil>
-                                        <!--
-                                        <Link :href="route('users.destroy',user.id)" method="DELETE" as="button" class="p-2 text-lg text-red-500 hover:text-indigo-700">Eliminar</Link>
-                                        -->
                                         <button @click="confirmDeletePpff" class="p-2 text-lg text-red-500 hover:text-indigo-700" >Eliminar</button>
                                         <Modal :show="showConfirmDelPpff" @close="closeModal">
                                             <div class="p-6">
@@ -76,6 +98,10 @@ const deletePpff = (id) => {
                             </template>
                         </Table>
                     </div>
+                </div>
+                <div class="font-medium text-base text-gray-900 whitespace-nowrap dark:text-white">
+                    <PpffCont v-if="P_showModal_I && selectedPpff" @close="P_showModal_I = false"
+                        :ppff="selectedPpff"/>
                 </div>
             </div>
         </div>

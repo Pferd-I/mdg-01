@@ -32,7 +32,7 @@ class EstudianteController extends Controller{
         return Inertia::render('Admin/Estudiantes/EstudianteIndex',[
             'estudiantes' => $estudiantes,
             'cursos' => $cursos,
-            'tiposbeca' => $tipos_beca,
+            'tipos_beca' => $tipos_beca,
             'search' => $request->search,
         ]);
     }
@@ -81,8 +81,51 @@ class EstudianteController extends Controller{
             'nombres' => 'required|string|max:100',
             'id_curso' => 'required|exists:cursos,id',
             'id_tipo_beca' => 'nullable|exists:tipo_becas,id',
-        ]);
+        ], $this->messages());
+
         $estudiante = Estudiante::create($validated);
         return redirect()->back()->with('success', 'Estudiante creado correctamente.');
+    }
+    public function update(Request $request, $id){
+        $estudiante = Estudiante::findOrFail($id);
+        $validated = $request->validate([
+        'ci' => 'required|string|max:20|unique:estudiantes,ci,' . $id,
+        'rude' => 'nullable|string|max:30|unique:estudiantes,rude,' . $id,
+            'apellido_p' => 'required|string|max:50',
+            'apellido_m' => 'nullable|string|max:50',
+            'nombres' => 'required|string|max:100',
+            'id_curso' => 'required|exists:cursos,id',
+            'id_tipo_beca' => 'nullable|exists:tipo_becas,id',
+        ], $this->messages());
+
+        $estudiante->update($validated);
+        return redirect()->route('estudiantes.index')->with('success', 'Estudiante editado correctamente.');
+    }
+    public function inhabilitar($id)
+{
+    $est = Estudiante::findOrFail($id);
+    $est->estado = !$est->estado;
+    $est->save();
+
+    $mensaje = $est->estado ? 'Estudiante habilitado nuevamente.' : 'Estudiante inhabilitado.';
+
+    return back()->with($est->estado ? 'success':'error' , $mensaje);
+}
+    public function messages(){
+        return [
+            'ci.required' => 'El campo CI es obligatorio.',
+            'ci.unique' => 'Ya existe un estudiante con ese CI.',
+            'ci.max' => 'El CI no debe exceder los 20 caracteres.',
+            'rude.unique' => 'El RUDE ingresado ya está registrado.',
+            'rude.max' => 'El RUDE no debe exceder los 30 caracteres.',
+            'apellido_p.required' => 'El apellido paterno es obligatorio.',
+            'apellido_p.max' => 'El apellido paterno no debe exceder los 50 caracteres.',
+            'apellido_m.max' => 'El apellido materno no debe exceder los 50 caracteres.',
+            'nombres.required' => 'El nombre del estudiante es obligatorio.',
+            'nombres.max' => 'El nombre no debe exceder los 100 caracteres.',
+            'id_curso.required' => 'Debe seleccionar un curso.',
+            'id_curso.exists' => 'El curso seleccionado no es válido.',
+            'id_tipo_beca.exists' => 'El tipo de beca seleccionado no es válido.',
+        ];
     }
 }

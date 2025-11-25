@@ -21,4 +21,7 @@ class Estudiante extends Model{
             'id_estudiante', 'id_ppff')
             ->withPivot('parentesco');
     }
+    public function observaciones(){
+        return $this->hasMany(Observaciones::class, 'id_estudiante');
+    }
 }

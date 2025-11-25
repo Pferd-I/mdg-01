@@ -6,54 +6,62 @@ import ButtonX from '@/Components/Subcomponents/ModalOberlayXButton.vue';
 import ModalContent from '@/Components/Subcomponents/ModalContent.vue';
 import ModalForm from '@/Components/Subcomponents/ModalFormOverfVis.vue'
 import PrimaryButton from '@/Components/PrimaryButtonModal.vue';
+import btnDelete from '@/Components/Aulas/SubComponentes/btnDelete.vue'
 import InputError from '@/Components/InputError.vue';
 import Multiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.css';
 
 const emit = defineEmits(['close'])
 const props = defineProps({
+    estudiante: Object,
     tipos_beca: Array,
     cursos: Array,
 });
 const form = useForm({
-    ci: '',
-    rude: '',
-    apellido_p: '',
-    apellido_m: '',
-    nombres: '',
-    id_curso: 1,
-    id_tipo_beca: 1,
+    ci:             props.estudiante.ci,
+    rude:           props.estudiante.rude,
+    apellido_p:     props.estudiante.apellido_p,
+    apellido_m:     props.estudiante.apellido_m,
+    nombres:        props.estudiante.nombres,
+    id_curso:       props.estudiante.id_curso,
+    id_tipo_beca:   props.estudiante.id_tipo_beca,
+    estado:           props.estudiante.estado,
 })
 
 //Seleccionar Curso
-const selectedCurso = ref(props.cursos.length ? props.cursos[0] : null);
+const selectedCurso = ref(props.cursos[props.estudiante.id_curso-1]);
 watch(selectedCurso, (nuevo) => {
   form.id_curso = nuevo ? nuevo.id : ''
 });
 
 //Seleccionar Beca
-const selectedBeca = ref(props.tipos_beca.length ? props.tipos_beca[0] : null);
+const selectedBeca = ref(props.tipos_beca[props.estudiante.id_tipo_beca-1]);
 watch(selectedBeca, (nuevo) => {
   form.id_tipo_beca = nuevo ? nuevo.id : ''
 });
 
-function crearEstudiante() {
-    form.post(route('estudiantes.store'), {
+function editEstudiante() {
+    form.put(route('estudiantes.update', props.estudiante.id), {
         onSuccess: () => {
             emit('close')
             form.reset()
         },
         onError: () => {
-            console.error('Ocurrió un error al crear el estudiante.')
+            console.error('Ocurrió un error al modificar el estudiante.')
         }
     })
 };
+function eliminar() {
+    form.put(route('estudiantes.inhabilitar', props.estudiante.id), {
+        onSuccess: () => emit('close')
+    })
+}
 </script>
 <template>
     <modal-overlay @cerrar="$emit('close')">
         <modal-content>
             <template #default>
-                <modal-form @submit.prevent="crearEstudiante">
+                <modal-form @submit.prevent="editEstudiante">
                     <div class="flex">
                         <div class="w-fit font-bold text-pewter">
                             <label for="ci">CI: </label>
@@ -118,8 +126,9 @@ function crearEstudiante() {
                         </div>
                     </div>
                     <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Crear
+                        Guardar Cambios
                     </PrimaryButton>
+                    <btnDelete  :class="{ 'opacity-25': form.processing }" :disabled="form.processing" @click="eliminar"/>
                 </modal-form>
             </template>
         </modal-content>

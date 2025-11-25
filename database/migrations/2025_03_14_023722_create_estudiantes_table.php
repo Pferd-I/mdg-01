@@ -16,10 +16,8 @@ return new class extends Migration{
             $table->string('apellido_p');
             $table->string('apellido_m');
             $table->string('nombres');
-            /*$table->integer('id_tipo_beca')->default(1);
-            $table->integer('id_curso')->default(1);*/
-            $table->foreignId('id_tipo_beca')->constrained('tipo_becas');
-            $table->foreignId('id_curso')->constrained('cursos');
+            $table->foreignId('id_tipo_beca')->default(1)->constrained('tipo_becas');
+            $table->foreignId('id_curso')->default(1)->constrained('cursos');
             $table->boolean('estado')->default(true);
             $table->timestamps();
         });

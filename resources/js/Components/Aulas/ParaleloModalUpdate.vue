@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import PrimaryButton from '@/Components/SecondaryButtonModal.vue';
 import InputError from '@/Components/InputError.vue';
-import btnDelete from '@/Components/Aulas/SubComponentes/btnDelete.vue'
+import btnDelete from '@/Components/Aulas/SubComponentes/btnDelete.vue';
 
 const props = defineProps({
     paralelo: Object
