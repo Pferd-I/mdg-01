@@ -1,5 +1,5 @@
 <script setup>
-import {computed, ref, reactive, watch, onMounted } from 'vue';
+import {computed, ref, reactive, watch, onMounted, onBeforeUnmount } from 'vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, useForm, router, usePage } from '@inertiajs/vue3';
 
@@ -12,6 +12,7 @@ import Info from '@/Components/Subcomponents/ButtonInfo.vue';
 import ButtonPlus from '@/Components/Subcomponents/ButtonPlus.vue';
 import Pencil from '@/Components/Subcomponents/ButtonPencil.vue';
 import Toast from '@/Components/AlertMessage.vue'
+import debounce from 'lodash/debounce';
 
 import EstCreate from '@/Components/Estudiantes/EstudianteModalCreate.vue';
 import EstInfo from '@/Components/Estudiantes/EstudianteModalInfo.vue';
@@ -47,17 +48,20 @@ function Est_openModal_Upda(est){
 
 //Búsqueda
 const busqueda = ref('');
-let timeout = null;
+
+const debouncedSearch = debounce((valor) => {
+    router.get(
+        route('estudiantes.index'),
+        { search: valor },
+        { preserveState: true, replace: true }
+    );
+}, 200);
 
 watch(busqueda, (nuevoValor) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-        router.get(
-            route('estudiantes.index'),
-            { search: nuevoValor },
-            { preserveState: true, replace: true }
-        );
-    }, 500);
+    debouncedSearch(nuevoValor);
+});
+onBeforeUnmount(() => {
+    debouncedSearch.cancel();
 });
 
 //Mensaje flash
@@ -97,7 +101,7 @@ watch(
                             <ButtonPlus @click="Est_openModal_New"/>
                         </div>
                         <div class="mt-2 mx-2 bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg w-auto h-min">
-                            <label for="busqueda"/> <input v-model="busqueda" id="busqueda" type="text" placeholder="Buscar estudiante..." class="m-3 border rounded px-3 py-2 w-11/12"/>
+                            <label for="busqueda"/> <input v-model="busqueda" id="busqueda" type="text" placeholder="Buscar estudiante..." class="m-3 border rounded px-3 py-2 w-11/12 text-darkblue-800"/>
                             <div class="mt-6 overflow-x-auto">
                                 <Table class="min-w-full border-collapse">
                                     <template #header>

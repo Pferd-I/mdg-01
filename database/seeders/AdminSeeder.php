@@ -34,20 +34,37 @@ class AdminSeeder extends Seeder{
 
         $this->createUser('admin', 'admin', 'admin');
         $this->createPlantel('Superu', 1);
+        $this->assignCargoToPlantel(1, 2);
+
+
+        $this->createUser('dirTorrez', 'admin', 'admin');
+        $this->createPlantel('Brayan Torrez Navia', 2);
+        $this->assignCargoToPlantel(2, 1);
+
 
         $this->createUser('profeJuan', 'profe', 'profesor');
-        $this->createPlantel('Juan Bernardo Aveldaño', 2);
-        $this->assignCargoToPlantel(2, 3);
-
-        $this->createUser('profeKarina', 'profe', 'profesor');
-        $this->createPlantel('Karina Rodriguez', 3);
+        $this->createPlantel('Juan Bernardo Aveldaño', 3);
         $this->assignCargoToPlantel(3, 3);
 
+        $this->createUser('profeKarina', 'profe', 'profesor');
+        $this->createPlantel('Karina Rodriguez', 4);
+        $this->assignCargoToPlantel(4, 3);
+
         $this->createUser('profeFreddy', 'profe', 'profesor');
-        $this->createPlantel('Freddy Gomez', 4);
+        $this->createPlantel('Freddy Gomez', 5);
+        $this->assignCargoToPlantel(5, 3);
 
         $this->createUser('profeRoxana', 'profe', 'profesor');
-        $this->createPlantel('Roxana Martinez', 5);
+        $this->createPlantel('Roxana Martinez', 6);
+        $this->assignCargoToPlantel(6, 3);
+
+        $this->createUser('secreNelly', 'admin', 'admin');
+        $this->createPlantel('Nelly Ortega', 7);
+        $this->assignCargoToPlantel(7, 3);
+
+        $this->createUser('profeLinda', 'profe', 'profesor');
+        $this->createPlantel('Linda Viruez', 8);
+        $this->assignCargoToPlantel(8, 3);
 
         $this->createUser('estFabiana', 'est', 'estudiante');
         $this->createUser('estVeronice', 'est', 'estudiante');

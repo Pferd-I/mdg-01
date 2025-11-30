@@ -24,4 +24,7 @@ class Estudiante extends Model{
     public function observaciones(){
         return $this->hasMany(Observaciones::class, 'id_estudiante');
     }
+    public function asistenciasDetalles(){
+        return $this->hasMany(AsistenciaDetalle::class, 'id_estudiante');
+    }
 }

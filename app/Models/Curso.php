@@ -19,4 +19,7 @@ class Curso extends Model{
     public function estudiantes(){
         return $this->hasMany(Estudiante::class, 'id_curso');
     }
+    public function plantelAsignaturaCurso(){
+        return $this->hasMany(PlantelAsignaturaCurso::class, 'id_curso');
+    }
 }

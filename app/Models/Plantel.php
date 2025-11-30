@@ -22,6 +22,10 @@ class Plantel extends Model{
             'id_plantel', 'id_cargo')
             ->withPivot('fecha_asignacion')->withTimestamps();
     }
+    //Referencia de otras tablas
+    public function plantelAsignaturaCurso(){
+        return $this->hasMany(PlantelAsignaturaCurso::class, 'id_plantel');
+    }
     public function observaciones(){
         return $this->hasMany(Observaciones::class, 'id_plantel');
     }

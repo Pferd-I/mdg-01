@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,15 +19,14 @@ class Observaciones extends Model{
         'estado'
     ];
     protected $casts = [
-        'fecha_evento' => 'date',
+        'fecha_evento' => 'date:d-m-Y',
     ];
-
     // Llaves foráneas
     public function estudiante(){
         return $this->belongsTo(Estudiante::class, 'id_estudiante');
     }
     public function plantel(){
-        return $this->belongsTo(User::class, 'id_plantel');
+        return $this->belongsTo(Plantel::class, 'id_plantel');
     }
     public function curso(){
         return $this->belongsTo(Curso::class, 'id_curso');
@@ -39,11 +39,12 @@ class Observaciones extends Model{
     // Tipos permitidos
     public static function tipos(){
         return [
-            'Ausencia' => 'No se presentó a clase.',
-            'Tareas' => 'Incumplimiento en entrega de tareas.',
-            'Indisciplina' => 'Comportamiento inapropiado.',
+            'Académico' => 'Rendimiento en las clases.',
+            'Asistencia' => 'Presencia en aula.',
+            'Disciplina' => 'Comportamiento dentro de la institución.',
             'Retiro' => 'Retiro a mitad de clase.',
-            'Aprovechamiento' => 'Aprovechamiento académico.',
+            'Tareas' => 'Incumplimiento en entrega de tareas.',
+            'Otro' => 'Situación particular dentro o en las cercanías de la institución.',
         ];
     }
 }

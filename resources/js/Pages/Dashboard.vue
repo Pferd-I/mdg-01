@@ -72,6 +72,14 @@ const openModal = (post) => {
                                     </template>
                                     <template #opcion>PPFF</template>
                                 </Option></a>
+                                <a :href="route('kardex.index')" class="block"><Option>
+                                    <template #img>
+                                        <img src="https://epicpadprinting.com/public/img/indus/Promotional.png"
+                                                    class="w-36 h-36  mt-6 m-auto" alt="Promotional" title="Promotional" loading="lazy"
+                                                    width="200" height="200">
+                                    </template>
+                                    <template #opcion>obs</template>
+                                </Option></a>
                             </div>
                         </div>
                     </section>

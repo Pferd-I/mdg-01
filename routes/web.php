@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\CreateGestionMensController;
 use App\Http\Controllers\PpffController;
 use App\Http\Controllers\MainController;
@@ -17,9 +18,12 @@ use App\Http\Controllers\NivelController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\MensualidadController;
+use App\Http\Controllers\ObservacionController;
 use App\Http\Controllers\ParaleloController;
 use App\Http\Controllers\PlantelController;
+use App\Http\Controllers\ReporteAsistenciaController;
 use App\Http\Controllers\TipoBecaController;
+use App\Models\Estudiante;
 use App\Models\Plantel;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+/* Rutas donde administrativos pueden ingresar */
 Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('/aulas',AulaController::class);
@@ -97,6 +102,32 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
             ->name('gestiones.mensualidades');
     //Route::resource('/editnivel',EditNivelController::class)->name(,'nivels.edit');
 });
+
+/* Rutas donde profesores y administrativos pueden ingresar */
+Route::middleware(['auth', 'role:admin|profesor'])->group(function () {
+    //Observaciones
+    Route::get('/observaciones', [ObservacionController::class, 'index'])->name('kardex.index');
+    Route::post('/observaciones', [ObservacionController::class, 'store'])->name('observaciones.store');
+    Route::put('/observaciones/{id}', [ObservacionController::class, 'update'])->name('observaciones.update');
+    Route::put('/observaciones/{id}/OnOff', [ObservacionController::class, 'OnOff'])->name('observaciones.onoff');
+
+    //Asistencias
+    Route::get('/asistencia', [AsistenciaController::class, 'index'])->name('asistencia.index');
+    Route::post('/asistencia', [AsistenciaController::class, 'store'])->name('asistencia.store');
+
+    //Reportes
+    Route::get('/reportes/asistencia', [ReporteAsistenciaController::class, 'index'])
+    ->name('reportes.asistencia');
+});
+//Api para obtener estudiantes activos de un curso
+Route::get('/api/asistencia/estudiantes/{curso}', function ($idCurso) {
+    $estudiantes = Estudiante::where('id_curso', $idCurso)
+        ->where('estado', true)
+        ->select('id', 'nombres', 'apellido_p', 'apellido_m')
+        ->get();
+
+    return response()->json($estudiantes);
+})->name('asistencia.estudiantes');
 
 Route::middleware('auth')->prefix('/main')->group(function(){
     Route::get('/', [MainController::class, 'index'])->name('main.index');

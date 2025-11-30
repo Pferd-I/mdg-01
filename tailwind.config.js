@@ -36,5 +36,11 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        require('daisyui'),],
+    daisyui: {
+        themes: ["light", "dark", "cupcake", "emerald"], // opcional: temas predefinidos
+        darkTheme: "dark", // tema por defecto en modo oscuro
+    },
 };

@@ -6,7 +6,7 @@ import ButtonX from '@/Components/Subcomponents/ModalOberlayXButton.vue';
 import ModalContent from '@/Components/Subcomponents/ModalContent.vue';
 import ModalForm from '@/Components/Subcomponents/ModalFormOverfVis.vue'
 import PrimaryButton from '@/Components/PrimaryButtonModal.vue';
-import btnDelete from '@/Components/Aulas/SubComponentes/btnDelete.vue'
+import btnDelete from '@/Components/Aulas/SubComponentes/btnDelete.vue';
 import InputError from '@/Components/InputError.vue';
 import Multiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.css';
@@ -128,7 +128,7 @@ function eliminar() {
                     <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Guardar Cambios
                     </PrimaryButton>
-                    <btnDelete  :class="{ 'opacity-25': form.processing }" :disabled="form.processing" @click="eliminar"/>
+                    <btnDelete :class="{ 'opacity-25': form.processing }" :disabled="form.processing" @click="eliminar"/>
                 </modal-form>
             </template>
         </modal-content>

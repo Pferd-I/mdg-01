@@ -12,7 +12,7 @@ use Inertia\Inertia;
 class EstudianteController extends Controller{
     public function index(Request $request){
 
-        $query = Estudiante::with(['curso.nivel', 'tipo_beca','padres']);
+        $query = Estudiante::with(['curso.nivel', 'curso.paralelo', 'tipo_beca','padres']);
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -101,16 +101,15 @@ class EstudianteController extends Controller{
         $estudiante->update($validated);
         return redirect()->route('estudiantes.index')->with('success', 'Estudiante editado correctamente.');
     }
-    public function inhabilitar($id)
-{
-    $est = Estudiante::findOrFail($id);
-    $est->estado = !$est->estado;
-    $est->save();
+    public function inhabilitar($id){
+        $est = Estudiante::findOrFail($id);
+        $est->estado = !$est->estado;
+        $est->save();
 
-    $mensaje = $est->estado ? 'Estudiante habilitado nuevamente.' : 'Estudiante inhabilitado.';
+        $mensaje = $est->estado ? 'Estudiante habilitado nuevamente.' : 'Estudiante inhabilitado.';
 
-    return back()->with($est->estado ? 'success':'error' , $mensaje);
-}
+        return back()->with($est->estado ? 'success':'error' , $mensaje);
+    }
     public function messages(){
         return [
             'ci.required' => 'El campo CI es obligatorio.',

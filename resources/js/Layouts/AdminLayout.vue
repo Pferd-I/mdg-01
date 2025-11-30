@@ -189,7 +189,7 @@ const showingNavigationDropdown = ref(false);
                         </div>-->
                         <!--/search bar -->
 
-                        <button aria-label="chat" class=" font-bold px-4 h-10 rounded-xl border bg-pewter focus:bg-gray-100 active:bg-gray-200">
+                        <button aria-label="chat" class=" font-bold px-4 h-10 rounded-xl border bg-darkblue-700 focus:bg-gray-100 active:bg-gray-200">
                             {{ $page.props.auth.user.name }}
                         </button>
                         <!--<button aria-label="search" class="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 md:hidden">
